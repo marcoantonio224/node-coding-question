@@ -4,7 +4,7 @@ import Home from './components/pages/Home/index';
 import Login from './components/pages/Login/index';
 import Signup from './components/pages/Signup/index';
 import Profile from './components/pages/Profile/index';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
     <div className="App">
         <header className="App-header">
           <div>
-              Divercity
+              <h1>Divercity</h1>
           </div>
           <nav>
             <ul>
