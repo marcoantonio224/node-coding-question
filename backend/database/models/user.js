@@ -25,9 +25,29 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    lastname: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
+    lastname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg:'Please enter your firstname'
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique:true
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg:'Please enter your firstname'
+        }
+      }
+    }
   },{
     sequelize,
     modelName: 'User',
@@ -51,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   // Create database if does not exist
-  User.sync()
+  User.sequelize.sync({ force: true });
 
 
   return User;
