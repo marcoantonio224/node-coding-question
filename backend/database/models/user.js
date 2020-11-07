@@ -66,12 +66,12 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   // Compare login password with user's password
-  User.prototype.validPassword = async function(password) {
+  User.prototype.isValidPassword = async function(password) {
     return await bcrypt.compare(password, this.password);
   }
 
   // Create database if does not exist
-  User.sequelize.sync({ force: true });
+  //User.sequelize.sync({ force: true });
 
 
   return User;
