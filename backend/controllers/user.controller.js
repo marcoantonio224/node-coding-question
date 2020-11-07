@@ -1,6 +1,7 @@
 const User = require('../database/models').User;
-console.log(User,' USER')
+
 module.exports = {
+  // Create method for new user
   create(req, res) {
     // Get request object for new user
     const { firstname, lastname, email, password } = req.body;
