@@ -9,11 +9,12 @@ function verifyToken(req, res, next) {
     // Get json web token from cookies
     const { token } = req.cookies;
     // Check if token exists
-    if(!token) return res.sendStatus(401).json({message:"No token provided."});
+    if(!token) return res.status(401).json({message:"No token provided."});
     // The verify the token
     ///const payload = jwt.verify(token, secretMessage);
     jwt.verify(token, secretMessage, (err, id) => {
-      if(err) return res.sendStatus(403).json({mesage:"Forbidden."});
+      // Return forbidden if error occurs
+      if(err) return res.status(403).json({mesage:"Forbidden."});
       // Assing the user to the id of user that created token
       req.user = id;
       // Execute the next function
@@ -21,8 +22,7 @@ function verifyToken(req, res, next) {
     });
   } catch(err) {
       // otherwise, return a bad request error
-      console.log('Error with getting user profile.')
-		  return res.sendStatus(400).end();
+		  return res.status(400).json({ message: "Error getting user profile. "});
    }
 }
 

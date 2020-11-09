@@ -70,6 +70,13 @@ module.exports = (sequelize, DataTypes) => {
     return await bcrypt.compare(password, this.password);
   }
 
+  // Return a shorthand of the User's properties/values
+  User.prototype.short = function() {
+    return {
+        firstname: this.firstname,
+        lastname:this.lastname,
+        email:this.email} ;
+    }
   // Create database if does not exist
   //User.sequelize.sync({ force: true });
 

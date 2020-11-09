@@ -15,9 +15,9 @@ module.exports = {
             password: password
         })
         // Send a status of 200 if created successfully
-        .then(user => res.sendStatus(200).json({message:"Created user", user: user}))
+        .then(user => res.status(200).json({message:"Created user", user: user}))
         // Render internal error within the server and failure message
-        .catch(error => res.sendStatus(500).json({message:"Oops! Saving user failed. Something went wrong."}));
+        .catch(error => res.status(500).json({message:"Oops! Saving user failed. Something went wrong."}));
     } catch(err) {
       console.log(err)
     }
@@ -32,7 +32,7 @@ module.exports = {
            // Successful promise, continue the process
            .then((result, err) => {
              // If invalid password, send invalid login
-             if(!result) return res.sendStatus(401).json({ message:"Invalid login." });
+             if(!result) return res.status(401).json({ message:"Invalid login." });
              // Create token for client
              const token = createJWToken(user.id, res);
              // Valid password, continue the process
@@ -40,7 +40,7 @@ module.exports = {
           })
         })
         // Failed promise
-        .catch(err => res.sendStatus(500).json({ message:"Oops! Something went wrong." }));
+        .catch(err => res.status(500).json({ message:"Oops! Something went wrong." }));
     } catch(err) {
       console.log(err);
     }

@@ -9,7 +9,7 @@ function generateJWT(userID, res) {
   // Create and sign a token based on user's id
   const token = jwt.sign({id: userID}, secretMessage);
   // Set a cookie for token
-  res.cookie('token', token, {maxAge:900000,httpOnly:true});
+  res.cookie('token', token, {maxAge:900000, httpOnly:true});
   // Return token
   return token;
 }
