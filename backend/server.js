@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require("cookie-parser")
+
 // Custom modules for application
 const routes = require('./routes/routes');
-// const database = require('./config/database');
-// const routes = require('./routes');
 
 // The application's port number
 const PORT = process.env.PORT || 8000;
@@ -16,9 +16,7 @@ require('dotenv').config();
 app.use(bodyParser.json());
 // Render body parser for HTML forms
 app.use(bodyParser.urlencoded({ extended: true}));
-
-// // Connect to the database
-// database.create_connection();
+app.use(cookieParser());
 
 // Use routes
 app.use('/api/', routes)

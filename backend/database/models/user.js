@@ -73,6 +73,5 @@ module.exports = (sequelize, DataTypes) => {
   // Create database if does not exist
   //User.sequelize.sync({ force: true });
 
-
   return User;
 };

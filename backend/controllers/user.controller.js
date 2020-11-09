@@ -1,5 +1,6 @@
 const User = require('../database/models').User;
 const createJWToken = require('./utils/generateToken');
+
 module.exports = {
   // Create method for new user
   create(req, res) {
@@ -14,9 +15,9 @@ module.exports = {
             password: password
         })
         // Send a status of 200 if created successfully
-        .then(user => res.status(200).json({message:"Created user", user: user}))
+        .then(user => res.sendStatus(200).json({message:"Created user", user: user}))
         // Render internal error within the server and failure message
-        .catch(error => res.send(500).json({message:"Oops! Saving user failed. Something went wrong."}));
+        .catch(error => res.sendStatus(500).json({message:"Oops! Saving user failed. Something went wrong."}));
     } catch(err) {
       console.log(err)
     }
@@ -31,17 +32,17 @@ module.exports = {
            // Successful promise, continue the process
            .then((result, err) => {
              // If invalid password, send invalid login
-             if(!result) return res.send(401).json({ message:"Invalid login." });
+             if(!result) return res.sendStatus(401).json({ message:"Invalid login." });
              // Create token for client
-             const token = createJWToken(user.id);
+             const token = createJWToken(user.id, res);
              // Valid password, continue the process
-             res.json({ message:"Valid logged in.", token: token });
+             return res.status(200).json({ message:"Valid logged in.", token: token });
           })
         })
         // Failed promise
-        .catch(err => res.send(500).json({message:"Oops! Something went wrong."}))
+        .catch(err => res.sendStatus(500).json({ message:"Oops! Something went wrong." }));
     } catch(err) {
-      console.log(err)
+      console.log(err);
     }
   }
 }
