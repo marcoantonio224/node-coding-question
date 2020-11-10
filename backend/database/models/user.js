@@ -72,10 +72,13 @@ module.exports = (sequelize, DataTypes) => {
 
   // Return a shorthand of the User's properties/values
   User.prototype.short = function() {
-    return {
-        firstname: this.firstname,
-        lastname:this.lastname,
-        email:this.email} ;
+      // Exclude private information, such as password
+      return {
+          firstname: this.firstname,
+          lastname: this.lastname,
+          description: this.description,
+          email: this.email
+      };
     }
   // Create database if does not exist
   //User.sequelize.sync({ force: true });

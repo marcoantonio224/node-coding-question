@@ -3,7 +3,7 @@ require('dotenv').config();
 // Get jwt secret message
 const secretMessage = process.env.JWT_SECRET;
 
-function verifyToken(req, res, next) {
+function isLoggedIn(req, res, next) {
   // Get token from cookies
   try {
     // Get json web token from cookies
@@ -26,4 +26,4 @@ function verifyToken(req, res, next) {
    }
 }
 
-module.exports = verifyToken;
+module.exports = isLoggedIn;

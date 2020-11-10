@@ -15,7 +15,7 @@ module.exports = {
             password: password
         })
         // Send a status of 200 if created successfully
-        .then(user => res.status(200).json({message:"Created user", user: user}))
+        .then(user => res.status(200).json({message:"Created user", user: user.short()}))
         // Render internal error within the server and failure message
         .catch(error => res.status(500).json({message:"Oops! Saving user failed. Something went wrong."}));
     } catch(err) {
